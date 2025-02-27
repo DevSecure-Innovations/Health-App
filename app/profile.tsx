@@ -40,7 +40,12 @@ const ProfileScreen = () => {
   );
 };
 
-const MenuItem = ({ icon, text }) => (
+interface MenuItemProps {
+  icon: string;
+  text: string;
+}
+
+const MenuItem: React.FC<MenuItemProps> = ({ icon, text }) => (
   <TouchableOpacity style={styles.menuItem}>
     <Icon name={icon} size={20} color="black" />
     <Text style={styles.menuText}>{text}</Text>

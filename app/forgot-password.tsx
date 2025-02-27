@@ -79,7 +79,7 @@ const ForgotPasswordScreen = () => {
 
           <View style={styles.loginContainer}>
             <Text style={styles.loginText}>Remember your password?</Text>
-            <TouchableOpacity onPress={() => router.navigate("/sign-in")}>
+            <TouchableOpacity onPress={() => router.replace("/sign-in")}>
               <Text style={styles.loginLink}> Login</Text>
             </TouchableOpacity>
           </View>
