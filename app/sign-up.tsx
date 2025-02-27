@@ -45,7 +45,7 @@ const SignUpScreen = () => {
           <View style={styles.card}>
             <TouchableOpacity
               style={styles.backButton}
-              onPress={() => router.replace("/sign-in")}
+              onPress={() => router.back()}
             >
               <MaterialCommunityIcons
                 name="arrow-left"
