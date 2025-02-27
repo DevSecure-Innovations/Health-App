@@ -1,22 +1,22 @@
 import { Link } from 'expo-router';
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
 const ProfileScreen = () => {
   return (
     <View style={styles.container}>
       
       <View style={styles.profileContainer}>
-        <Icon name="user-circle" size={80} color="black" />
+        <FontAwesome5 name="user-circle" size={80} color="black" />
         <Text style={styles.username}>Guest</Text>
 
         <View style={styles.iconRow}>
           <TouchableOpacity style={styles.iconButton}>
-            <Icon name="user-edit" size={24} color="green" />
+            <FontAwesome5 name="user-edit" size={24} color="green" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.iconButton}>
-            <Icon name="sign-in-alt" size={24} color="green" />
+            <FontAwesome5 name="sign-in-alt" size={24} color="green" />
           </TouchableOpacity>
         </View>
       </View>
@@ -40,10 +40,15 @@ const ProfileScreen = () => {
   );
 };
 
-const MenuItem = ({ icon, text }) => (
+type MenuItemProps = {
+  icon: string; 
+  text: string;
+};
+
+const MenuItem = (props:MenuItemProps) => (
   <TouchableOpacity style={styles.menuItem}>
-    <Icon name={icon} size={20} color="black" />
-    <Text style={styles.menuText}>{text}</Text>
+    <FontAwesome5 name={props.icon} size={20} color="black" />
+    <Text style={styles.menuText}>{props.text}</Text>
   </TouchableOpacity>
 );
 
