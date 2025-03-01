@@ -1,6 +1,5 @@
-"use client"
-
-import React, { useState } from "react"
+"use client";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -10,25 +9,31 @@ import {
   ImageBackground,
   ScrollView,
   Image,
-} from "react-native"
-import { Text, TextInput, Button, Checkbox } from "react-native-paper"
-import { useRouter } from "expo-router"
-import { MaterialCommunityIcons } from "@expo/vector-icons"
+} from "react-native";
+import { Text, TextInput, Button, Checkbox } from "react-native-paper";
+import { useRouter } from "expo-router";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const SignUpScreen = () => {
-  const [fullName, setFullName] = useState("")
+  const [fullName, setFullName] = useState("");
   // const [email, setEmail] = useState("")
-  const [phoneNumber, setPhoneNumber] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
-  const [passwordVisible, setPasswordVisible] = useState(false)
-  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false)
-  const [termsAccepted, setTermsAccepted] = useState(false)
-  const router = useRouter()
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const router = useRouter();
 
   const handleSignUp = () => {
-    console.log("Signing up with:", fullName, phoneNumber, phoneNumber, password)
-  }
+    console.log(
+      "Signing up with:",
+      fullName,
+      phoneNumber,
+      phoneNumber,
+      password
+    );
+  };
 
   return (
     <ImageBackground
@@ -187,7 +192,7 @@ const SignUpScreen = () => {
       </KeyboardAvoidingView>
     </ImageBackground>
   );
-}
+};
 
 const styles = StyleSheet.create({
   backgroundImage: {
@@ -206,14 +211,14 @@ const styles = StyleSheet.create({
   },
   card: {
     width: "85%", // Adjusted for better responsiveness
-  padding: 20, // More breathing space
-  borderRadius: 24, // Smoother edges
-  backgroundColor: "rgba(255, 255, 255, 0.97)", // Slightly more opacity
-  elevation: 6, // Subtle shadow
-  shadowColor: "#000",
-  shadowOpacity: 0.2, // Softer shadow
-  shadowRadius: 8, // More natural spread
-  shadowOffset: { width: 0, height: 4 }, // Balanced depth
+    padding: 20, // More breathing space
+    borderRadius: 24, // Smoother edges
+    backgroundColor: "rgba(255, 255, 255, 0.97)", // Slightly more opacity
+    elevation: 6, // Subtle shadow
+    shadowColor: "#000",
+    shadowOpacity: 0.2, // Softer shadow
+    shadowRadius: 8, // More natural spread
+    shadowOffset: { width: 0, height: 4 }, // Balanced depth
   },
   backButton: {
     position: "absolute",
@@ -314,13 +319,12 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   logo: {
-    width: 120,  // Adjust size as needed
+    width: 120, // Adjust size as needed
     height: 120, // Keep it proportional
     alignSelf: "center",
     marginBottom: 20, // Adds spacing below the logo
     resizeMode: "contain", // Ensures the image doesn’t stretch
   },
-})
+});
 
-export default SignUpScreen
-
+export default SignUpScreen;

@@ -84,6 +84,7 @@ const LoginScreen = () => {
             style={styles.loginButton}
             labelStyle={styles.buttonText}
             contentStyle={styles.buttonContent}
+            disabled={!phoneNumber ||!password || !checked}
           >
             LOGIN
           </Button>
