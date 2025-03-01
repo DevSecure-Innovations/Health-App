@@ -9,7 +9,7 @@ import {
     ImageSourcePropType,
 } from "react-native";
 import Color from "./../constants/color";
-import color from "./../constants/color";
+import { LinearGradient } from "expo-linear-gradient";
 
 type CardHomeProps= {
 	title?: string;
@@ -31,17 +31,19 @@ const CardHome = (props: CardHomeProps) => {
 	return(
 		<View style={styles.mainCont}>
 			<ImageBackground style={styles.cntxtCont} source={CardProps.imageLink}>
-				<View style={styles.titleCont}>
-					<Text style={styles.title}>{CardProps.title}</Text>
-				</View>
-				<View style={styles.descCont}>
-					<Text style={styles.desc}>&emsp;{CardProps.description}</Text>
-				</View>
-				<View style={styles.btnCont}>
-					<TouchableOpacity style={styles.btn}>
-						<Text style={styles.btnText}>{CardProps.buttonText}</Text>
-					</TouchableOpacity>
-				</View>
+				<LinearGradient colors={["rgba(0,0,0,0.8)", "rgba(0,0,0,0.6)", "transparent"]} style={styles.gradient}>
+					<View style={styles.titleCont}>
+						<Text style={styles.title}>{CardProps.title}</Text>
+					</View>
+					<View style={styles.descCont}>
+						<Text style={styles.desc}>&emsp;{CardProps.description}</Text>
+					</View>
+					<View style={styles.btnCont}>
+						<TouchableOpacity style={styles.btn}>
+							<Text style={styles.btnText}>{CardProps.buttonText}</Text>
+						</TouchableOpacity>
+					</View>
+				</LinearGradient>
 			</ImageBackground>
 		</View>
 	);
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
 		margin: 10,
 		borderRadius: 20,
 		overflow: "hidden",
-		backgroundColor: Color.baseWhite,
+		backgroundColor: Color.baseWhite10Tint,
 		shadowColor: "#000000",
 		shadowOffset: { width: 0, height: 2 },
 		shadowOpacity: 0.8,
@@ -63,6 +65,9 @@ const styles = StyleSheet.create({
 	},
 	cntxtCont:{
 		flex:1,
+	},
+	gradient: {
+		flex: 1,
 		paddingVertical: 10,
 		paddingHorizontal: 20,
 	},
@@ -87,7 +92,7 @@ const styles = StyleSheet.create({
 	},
 	btn: {
 		height: 50,
-		width: "50%",
+		width: "55%",
 		borderRadius: 30,
 		paddingVertical: 5,
 		paddingHorizontal: 15,

@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Color from './../constants/color';
+import { LinearGradient } from 'expo-linear-gradient';
 
 type CardProps ={
 	title?: string;
@@ -22,9 +23,9 @@ type CardProps ={
 
 const defaultProps:CardProps = {
 	title: 'Medicine 1',
-	info0: 'Dosage: 300mg',
-	info1: 'Form Factor: Tablet',
-	info2: 'Age restriction: 13+',
+	info0: '300mg',
+	info1: 'Tablet',
+	info2: '13+',
 	quantity: '15 tablets',
 	price: 370,
 	imageLink: require('./../assets/images/tablets.jpg'),
@@ -35,32 +36,38 @@ const Card = (props:CardProps)=>{
 	return(
 		<View style={styles.mainCont}>
 			<ImageBackground imageStyle={styles.image} style={{flex:1}} source={Props.imageLink}>
-				<View style={styles.overlay}>
-					<View style={styles.cartCont}>
-						<TouchableOpacity style={styles.cartBtn}>
-							<MaterialIcons style={styles.cartIcon} name="add-shopping-cart"/>
-						</TouchableOpacity>
-					</View>
-					<View style={styles.context}>
-						<View style={styles.contextInfo}>
-							<Text style={styles.title}>{Props.title}</Text>
-							<Text style={styles.desc}>
-								{Props.info0}{"\n"}
-								{Props.info1}{"\n"}
-								{Props.info2}
-							</Text>
-						</View>
-						<View style={styles.priceDetailsCont}>
-							<View>
-								<Text style={styles.quantity}>{Props.quantity}</Text>
-								<Text style={styles.price}>${Props.price}</Text>
-							</View>
-							<TouchableOpacity style={styles.detailsBtn}>
-								<Text style={styles.detailsBtnText}>SEE DETAILS</Text>
+				<LinearGradient 
+					colors={[ "transparent", Color.baseWhite10Tint]} 
+					locations={[0.35, 0.5]}
+					style={styles.gradient}
+				>
+					<View style={styles.overlay}>
+						<View style={styles.cartCont}>
+							<TouchableOpacity style={styles.cartBtn}>
+								<MaterialIcons style={styles.cartIcon} name="add-shopping-cart"/>
 							</TouchableOpacity>
 						</View>
+						<View style={styles.context}>
+							<View style={styles.contextInfo}>
+								<Text style={styles.title}>{Props.title}</Text>
+								<Text style={styles.desc}>
+									Dosage: {Props.info0}{"\n"}
+									Form Factor: {Props.info1}{"\n"}
+									Age Restriction: {Props.info2}
+								</Text>
+							</View>
+							<View style={styles.priceDetailsCont}>
+								<View>
+									<Text style={styles.quantity}>{Props.quantity}</Text>
+									<Text style={styles.price}>₹ {Props.price}</Text>
+								</View>
+								<TouchableOpacity style={styles.detailsBtn}>
+									<Text style={styles.detailsBtnText}>SEE DETAILS</Text>
+								</TouchableOpacity>
+							</View>
+						</View>
 					</View>
-				</View>
+				</LinearGradient>
 			</ImageBackground>
 		</View>
 	);
@@ -72,14 +79,20 @@ const styles = StyleSheet.create({
 		width: 200,
 		borderRadius: 20,
 		overflow: "hidden",
-		backgroundColor: Color.baseWhite,
-		shadowColor: "#000",
-		shadowOffset: {width: 0, height: 2},
+		backgroundColor: Color.baseWhite10Tint,
+		shadowColor: "#000000",
+		shadowOffset: { width: 0, height: 2 },
+		shadowOpacity: 0.8,
+		shadowRadius: 2,
+		elevation: 5,
 	},
 	image: {
 		resizeMode: "cover",
 		position: "absolute",
 		bottom: 100,
+	},
+	gradient: {
+		flex: 1,
 	},
 	overlay: {
 		flex: 1,
@@ -93,7 +106,7 @@ const styles = StyleSheet.create({
 		height: 40,
 		width: 40,
 		borderRadius: "100%",
-		backgroundColor: Color.baseWhiteTransparent,
+		backgroundColor: "rgba(255,255,255,0.65)",
 		justifyContent: "center",
 		alignItems: "center",
 	},
@@ -119,11 +132,13 @@ const styles = StyleSheet.create({
 		lineHeight: 20,
 		fontWeight: 700,
 		marginBottom: 2,
+		textTransform: "capitalize",
 		color: Color.seaweed,
 	},
 	desc: {
 		fontSize: 14,
 		lineHeight: 16,
+		textTransform: "capitalize",
 		color: Color.baseBlack,
 	},
 	priceDetailsCont: {

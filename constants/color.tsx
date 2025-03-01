@@ -1,5 +1,6 @@
 export default{
 	baseWhite: "#D8E0E2",
+	baseWhite10Tint: "#C2CACB",
 	baseWhiteTransparent: "#D8E0E28D",
 	searchbarBorder: "#9E9E9E",
 	graniteGrey: "#4B4B4B",
