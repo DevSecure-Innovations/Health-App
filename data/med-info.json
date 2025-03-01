@@ -1,0 +1,169 @@
+{
+    "cards":[
+        {
+           "title":"Paracetamol",
+           "dosage":"300mg",
+           "formFac":"Tablet",
+           "ageRes":"13+",
+           "price": 10,
+           "quantity": 10
+        },
+        {
+            "title": "Calpol",
+            "dosage": "5 ml",
+            "formFac": "Syrup",
+            "ageRes": "3 months+",
+            "price": 35,
+            "quantity": 10
+        },
+
+        {
+            "title":"Dolo 650",
+            "dosage":"650mg",
+            "formFac":"Tablet",
+            "ageRes":"18+",
+            "price": 20,
+            "quantity": 10
+        },
+
+        {
+            "title":"Crocin",
+            "dosage":"500mg",
+            "formFac":"Tablet",
+            "ageRes":"18+",
+            "price": 15,
+            "quantity": 10
+        },
+        {
+            "title":"Saridon",
+            "dosage":"500mg",
+            "formFac":"Tablet",
+            "ageRes":"18+",
+            "price": 25,
+            "quantity": 10
+        },
+        {
+            "title":"Combiflam",
+            "dosage":"400mg",
+            "formFac":"Tablet",
+            "ageRes":"18+",
+            "price": 30,
+            "quantity": 10
+        },
+        {
+            "title":"Disprin",
+            "dosage":"500mg",
+            "formFac":"Tablet",
+            "ageRes":"18+",
+            "price": 10,
+            "quantity": 10
+        },
+        {
+            "title":"Aspirin",
+            "dosage":"500mg",
+            "formFac":"Tablet",
+            "ageRes":"18+",
+            "price": 10,
+            "quantity": 10
+        },
+        {
+            "title":"Ibuprofen",
+            "dosage":"400mg",
+            "formFac":"Tablet",
+            "ageRes":"18+",
+            "price": 20,
+            "quantity": 10
+        },
+        {
+            "title":"Brufen",
+            "dosage":"250mg",
+            "formFac":"Tablet",
+            "ageRes":"18+",
+            "price": 20,
+            "quantity": 10
+        },
+        {
+            "title":"Naproxen",
+            "dosage":"300mg",
+            "formFac":"Tablet",
+            "ageRes":"18+",
+            "price": 25,
+            "quantity": 10
+        },
+        {
+            "title":"Diclofenac",
+            "dosage":"50mg",
+            "formFac":"Tablet",
+            "ageRes":"18+",
+            "price": 10,
+            "quantity": 10
+        },
+        {
+            "title":"Voltaren",
+            "dosage":"50mg",
+            "formFac":"Tablet",
+            "ageRes":"18+",
+            "price": 10,
+            "quantity": 10
+        },
+        {
+            "title":"Nimesulide",
+            "dosage":"100mg",
+            "formFac":"Tablet",
+            "ageRes":"18+",
+            "price": 15,
+            "quantity": 10
+        },
+        {
+            "title":"Nimulid",
+            "dosage":"120mg",
+            "formFac":"Tablet",
+            "ageRes":"18+",
+            "price": 15,
+            "quantity": 10
+        },
+        {
+            "title":"Ketorolac",
+            "dosage":"10mg",
+            "formFac":"Tablet",
+            "ageRes":"18+",
+            "price": 20,
+            "quantity": 10
+        },
+        {
+            "title":"Tramadol",
+            "dosage":"50mg",
+            "formFac":"Tablet",
+            "ageRes":"18+",
+            "price": 10,
+            "quantity": 10
+        },
+
+        {
+            "title":"Tylenol",
+            "dosage":"500mg",
+            "formFac":"Tablet",
+            "ageRes":"18+",
+            "price": 20,
+            "quantity": 10
+
+        },
+        {
+            "title":"Doliprane",
+            "dosage":"5 ml",
+            "formFac":"Syrup",
+            "ageRes":"15+",
+            "price": 30,
+            "quantity": 10
+        },
+        
+        {
+            "title": "Babygesic",
+            "dosage": "5 ml",
+            "formFac": "Syrup",
+            "ageRes": "6 months+",
+            "price": 40,
+            "quantity": 10
+        }
+    ]
+}
