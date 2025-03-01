@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
 		lineHeight: 20,
 		fontWeight: 700,
 		marginBottom: 2,
-		color: Color.olivine,
+		color: Color.seaweed,
 	},
 	desc: {
 		fontSize: 14,
