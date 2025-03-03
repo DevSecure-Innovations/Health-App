@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-import React from 'react';
+import React, {useState} from 'react';
 import {
 	View, 
 	Text, 
@@ -7,185 +6,23 @@ import {
 	TouchableOpacity,
 	ImageBackground,
     ImageSourcePropType,
+	Modal,
 } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import Color from './../constants/color';
-
-type CardProps ={
-	title?: string;
-	info0?: string;
-	info1?: string;
-	info2?: string;
-	quantity?: string;
-	price?: number;
-	imageLink?: ImageSourcePropType;
-};
-
-const defaultProps:CardProps = {
-	title: 'Medicine 1',
-	info0: 'Dosage: 300mg',
-	info1: 'Form Factor: Tablet',
-	info2: 'Age restriction: 13+',
-	quantity: '15 tablets',
-	price: 370,
-	imageLink: require('./../assets/images/tablets.jpg'),
-};
-
-const Card = (props:CardProps)=>{
-	const Props = {...defaultProps,...props};
-	return(
-		<View style={styles.mainCont}>
-			<ImageBackground imageStyle={styles.image} style={{flex:1}} source={Props.imageLink}>
-				<View style={styles.overlay}>
-					<View style={styles.cartCont}>
-						<TouchableOpacity style={styles.cartBtn}>
-							<MaterialIcons style={styles.cartIcon} name="add-shopping-cart"/>
-						</TouchableOpacity>
-					</View>
-					<View style={styles.context}>
-						<View style={styles.contextInfo}>
-							<Text style={styles.title}>{Props.title}</Text>
-							<Text style={styles.desc}>
-								{Props.info0}{"\n"}
-								{Props.info1}{"\n"}
-								{Props.info2}
-							</Text>
-						</View>
-						<View style={styles.priceDetailsCont}>
-							<View>
-								<Text style={styles.quantity}>{Props.quantity}</Text>
-								<Text style={styles.price}>${Props.price}</Text>
-							</View>
-							<TouchableOpacity style={styles.detailsBtn}>
-								<Text style={styles.detailsBtnText}>SEE DETAILS</Text>
-							</TouchableOpacity>
-						</View>
-					</View>
-				</View>
-			</ImageBackground>
-		</View>
-	);
-};
-
-const styles = StyleSheet.create({
-	mainCont: {
-		height: 250,
-		width: 200,
-		borderRadius: 20,
-		overflow: "hidden",
-		backgroundColor: Color.baseWhite,
-		shadowColor: "#000",
-		shadowOffset: {width: 0, height: 2},
-	},
-	image: {
-		resizeMode: "cover",
-		position: "absolute",
-		bottom: 100,
-	},
-	overlay: {
-		flex: 1,
-	},
-	cartCont: {
-		position: "absolute",
-		top: 5,
-		right: 5,
-	},
-	cartBtn: {
-		height: 40,
-		width: 40,
-		borderRadius: "100%",
-		backgroundColor: Color.baseWhiteTransparent,
-		justifyContent: "center",
-		alignItems: "center",
-	},
-	cartIcon: {
-		fontSize: 25,
-		color: Color.seaweed
-	},
-	context: {
-		height: "55%",
-		flex: 1,
-		padding: 5,
-		borderRadius: 15,
-		position: "absolute",
-		inset: 5,
-		top: "auto",
-		backgroundColor: Color.olivine,
-	},
-	contextInfo: {
-		margin: 5,
-	},
-	title: {
-		fontSize: 20,
-		lineHeight: 20,
-		fontWeight: 700,
-		marginBottom: 2,
-		color: Color.seaweed,
-	},
-	desc: {
-		fontSize: 14,
-		lineHeight: 16,
-		color: Color.baseBlack,
-	},
-	priceDetailsCont: {
-		width: "100%",
-		position: "absolute",
-		inset: 5,
-		top: "auto",
-		flexDirection: "row",
-		justifyContent: "space-between",
-		alignItems: "center",
-	},
-	quantity: {
-		fontSize: 11,
-		fontWeight: 600,
-		color: Color.graniteGrey,
-	},
-	price: {
-		fontSize: 18,
-		fontWeight: 800,
-		lineHeight: 18,
-		color: Color.baseBlack,
-	},
-	contextButton: {
-	},
-	detailsBtn: {
-		height: 40,
-		width: "60%",
-		borderRadius: 20,
-		justifyContent: "center",
-		alignItems: "center",
-		backgroundColor: Color.seaweed
-	},
-	detailsBtnText: {
-		fontWeight: 700, 
-		color: Color.baseWhite
-	},
-});
-
-export default Card;
-=======
-import React from 'react';
-import {
-	View, 
-	Text, 
-	StyleSheet,
-	TouchableOpacity,
-	ImageBackground,
-    ImageSourcePropType,
-} from 'react-native';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import Color from './../constants/color';
 import { LinearGradient } from 'expo-linear-gradient';
+import Color from './../constants/color';
+import CardMedFull from './card-med-full';
 
 type CardProps ={
 	title?: string;
 	info0?: string;
 	info1?: string;
 	info2?: string;
-	quantity?: string;
-	price?: number;
+	amount0: {quantity: string; price: number;};
+	amount1: {quantity: string; price: number;};
+	amount2: { quantity: string; price: number;};
 	imageLink?: ImageSourcePropType;
+	cartOnPress?: () => void;
 };
 
 const defaultProps:CardProps = {
@@ -193,13 +30,16 @@ const defaultProps:CardProps = {
 	info0: '300mg',
 	info1: 'Tablet',
 	info2: '13+',
-	quantity: '15 tablets',
-	price: 370,
+	amount0:{quantity: "5 tablets", price: 20},
+	amount1:{quantity: "10 tablets", price: 40},
+	amount2:{quantity: "15 tablets", price: 60},
 	imageLink: require('./../assets/images/tablets.jpg'),
 };
 
 const Card = (props:CardProps)=>{
 	const Props = {...defaultProps,...props};
+	const [modalState, setModalState] = useState(false);
+
 	return(
 		<View style={styles.mainCont}>
 			<ImageBackground imageStyle={styles.image} style={{flex:1}} source={Props.imageLink}>
@@ -210,7 +50,7 @@ const Card = (props:CardProps)=>{
 				>
 					<View style={styles.overlay}>
 						<View style={styles.cartCont}>
-							<TouchableOpacity style={styles.cartBtn}>
+							<TouchableOpacity style={styles.cartBtn} onPress={Props.cartOnPress}>
 								<MaterialIcons style={styles.cartIcon} name="add-shopping-cart"/>
 							</TouchableOpacity>
 						</View>
@@ -225,12 +65,41 @@ const Card = (props:CardProps)=>{
 							</View>
 							<View style={styles.priceDetailsCont}>
 								<View>
-									<Text style={styles.quantity}>{Props.quantity}</Text>
-									<Text style={styles.price}>₹ {Props.price}</Text>
+									<Text style={styles.quantity}>{Props.amount0.quantity}</Text>
+									<Text style={styles.price}>₹ {Props.amount0.price}</Text>
 								</View>
-								<TouchableOpacity style={styles.detailsBtn}>
-									<Text style={styles.detailsBtnText}>SEE DETAILS</Text>
+								<TouchableOpacity style={styles.detailsBtn} onPress={() => setModalState(true)}>
+									<Text style={styles.detailsBtnText}>see details</Text>
 								</TouchableOpacity>
+								<Modal
+									animationType="slide"
+									transparent
+									visible={modalState}
+									onRequestClose={() => setModalState(false)}
+								>
+									<View style={styles.popupOverlay}>
+										<CardMedFull
+											title={Props.title}
+											info0={Props.info0}
+											info1={Props.info1}
+											info2={Props.info2}
+											imageLink={Props.imageLink}
+											amount0={{
+												quantity: props.amount0.quantity,
+												price : props.amount0.price
+											}}
+											amount1={{
+												quantity: props.amount1.quantity,
+												price : props.amount1.price
+											}}
+											amount2={{
+												quantity: props.amount2.quantity,
+												price : props.amount2.price
+											}}
+											closeOnPress={() => setModalState(false)}
+										/>
+									</View>
+								</Modal>
 							</View>
 						</View>
 					</View>
@@ -279,7 +148,7 @@ const styles = StyleSheet.create({
 	},
 	cartIcon: {
 		fontSize: 25,
-		color: Color.seaweed
+		color: Color.seaweed20LTint
 	},
 	context: {
 		height: "55%",
@@ -289,7 +158,15 @@ const styles = StyleSheet.create({
 		position: "absolute",
 		inset: 5,
 		top: "auto",
-		backgroundColor: Color.olivine,
+		backgroundColor: Color.olivine40LTint,
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 12,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 3.84,
+		elevation: 5,
 	},
 	contextInfo: {
 		margin: 5,
@@ -300,7 +177,7 @@ const styles = StyleSheet.create({
 		fontWeight: 700,
 		marginBottom: 2,
 		textTransform: "capitalize",
-		color: Color.seaweed,
+		color: Color.seaweed20LTint,
 	},
 	desc: {
 		fontSize: 14,
@@ -326,7 +203,7 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		fontWeight: 800,
 		lineHeight: 18,
-		color: Color.baseBlack,
+		color: Color.seaweed20LTint,
 	},
 	contextButton: {
 	},
@@ -334,15 +211,22 @@ const styles = StyleSheet.create({
 		height: 40,
 		width: "60%",
 		borderRadius: 20,
-		justifyContent: "center",
-		alignItems: "center",
-		backgroundColor: Color.seaweed
+		backgroundColor: Color.seaweed20LTint
 	},
 	detailsBtnText: {
+		width: "100%",
+		height: "100%",
+		textAlignVertical: "center",
+		textAlign: "center",
+		fontSize: 16,
 		fontWeight: 700, 
-		color: Color.baseWhite
+		textTransform: "capitalize",
+		color: "#FFFFFF"
+	},
+	popupOverlay: {
+		flex: 1,
+		justifyContent: "flex-end"
 	},
 });
 
 export default Card;
->>>>>>> 30fec46d1a12ad1737ae0055e3d83a660409288e
