@@ -7,7 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 const services = [
   { id: "1", title: "Tap Order Ambulance", image: require("../../assets/images/ambulance.jpg"), screen: "medicine" },
   { id: "2", title: "Need Urgent Blood? Find Donors in Just One Click.", image: require("../../assets/images/blood.jpg"), screen: "blood" },
-  { id: "3", title: "Find Nearby Hospitals", image: require("../../assets/images/hospital.jpg"), screen: "./pages/hospitals" },
+  { id: "3", title: "Find Nearby Hospitals", image: require("../../assets/images/hospital.jpg"), screen: "hospitals" },
 ];
 
 export default function Index() {
