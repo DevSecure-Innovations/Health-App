@@ -1,22 +1,47 @@
-import { Link } from 'expo-router';
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import { 
+  View, 
+  Text, 
+  TouchableOpacity, 
+  Image, 
+  StyleSheet 
+} from 'react-native';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import Ionicons from '@expo/vector-icons/Ionicons';
+
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParam } from '@/data/navigation-type';
+
+import Color from "./../constants/color";
+import MenuItem from '@/components/menu-item';
+
+type NavigationProp = StackNavigationProp<RootStackParam>;
 
 const ProfileScreen = () => {
+  const navigation = useNavigation<NavigationProp>();
+  const backPressHandler = () => {
+    navigation.goBack();
+  };
+
   return (
     <View style={styles.container}>
-      
+      <View style={styles.header}>
+        <TouchableOpacity style={styles.backButton} onPress={backPressHandler}>
+          <Ionicons name="chevron-back" style={styles.backIcon} />
+        </TouchableOpacity>
+        <Text style={styles.headerText}>profile</Text>
+      </View>
       <View style={styles.profileContainer}>
-        <Icon name="user-circle" size={80} color="black" />
+        <FontAwesome5 name="user-circle" size={100} color="black" />
         <Text style={styles.username}>Guest</Text>
 
         <View style={styles.iconRow}>
           <TouchableOpacity style={styles.iconButton}>
-            <Icon name="user-edit" size={24} color="green" />
+            <FontAwesome5 name="user-edit" style={styles.icon} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.iconButton}>
-            <Icon name="sign-in-alt" size={24} color="green" />
+            <FontAwesome5 name="sign-in-alt" style={styles.icon} />
           </TouchableOpacity>
         </View>
       </View>
@@ -34,66 +59,79 @@ const ProfileScreen = () => {
         <MenuItem icon="cog" text="Settings" />
         <MenuItem icon="info-circle" text="About Us" />
         <MenuItem icon="question-circle" text="Help & Feedback" />
-        <MenuItem icon="sign-out-alt" text="Log Out" />
+        <MenuItem icon="sign-out-alt" text="Log Out" underline={false} />
       </View>
     </View>
   );
 };
 
-const MenuItem = ({ icon, text }) => (
-  <TouchableOpacity style={styles.menuItem}>
-    <Icon name={icon} size={20} color="black" />
-    <Text style={styles.menuText}>{text}</Text>
-  </TouchableOpacity>
-);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#DDE1E7',
-    padding: 20,
+    backgroundColor: Color.baseWhite,
+    paddingHorizontal: 10,
   },
   header: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 15,
+    height: 50,
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 10,
+  },
+  backButton: {
+    height: 50,
+  },
+  backIcon: {
+    height: "100%",
+    textAlign: "center",
+    textAlignVertical: "center",
+    fontSize: 40
+  },
+  headerText: { 
+    height: "100%",
+    fontSize: 24,
+    fontWeight: 500,
+    textTransform: "capitalize",
+    textAlignVertical: "center",
+    marginLeft: 10,
   },
   profileContainer: {
     alignItems: 'center',
     marginBottom: 20,
   },
   username: {
-    fontSize: 18,
+    fontSize: 28,
     fontWeight: 'bold',
     marginTop: 5,
   },
   iconRow: {
+    width: "100%",
     flexDirection: 'row',
+    justifyContent: "space-evenly",
     marginTop: 10,
   },
   iconButton: {
-    marginHorizontal: 10,
-    padding: 8,
-    backgroundColor: '#E8F5E9',
-    borderRadius: 50,
+    height: 70,
+    width: 70,
+    backgroundColor: Color.baseGreen,
+    borderRadius: "50%",
+    overflow: "hidden",
+  },
+  icon: {
+    height: "100%",
+    textAlign: "center",
+    textAlignVertical: "center",
+    fontSize: 30,
+    color: Color.seaweed,
   },
   section: {
     marginBottom: 20,
   },
   sectionTitle: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: 'green',
+    fontSize: 18,
+    fontWeight: 600,
+    color: '#6E9F60',
     marginBottom: 5,
-  },
-  menuItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 10,
-  },
-  menuText: {
-    fontSize: 16,
-    marginLeft: 10,
   },
 });
 

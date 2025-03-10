@@ -1,28 +1,23 @@
 import { StatusBar } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import HomeScreen from "./home";
 import MedicineScreen from "./medicine";
 import BloodDonationScreen from "./blood-donation";
-import ProfileScreen from "./../profile";
 
+import { MainTabsParam } from "./../../data/navigation-type";
 import TabBar from "@/components/bottom-tab-bar";
 import SearchBar from "@/components/search-bar";
 import Color from "@/constants/color";
 
-type BottomTabParam = {
-	Medicine: undefined;
-	Home: undefined;
-	BloodDonation: undefined;
-};
-
-const Tab =createBottomTabNavigator<BottomTabParam>();
+const Tab = createBottomTabNavigator<MainTabsParam>();
 
 const MainTabsLayout = () => {
 	return(
 		<>
-			<SearchBar linkProfile="./../profile"/>
 			<StatusBar barStyle="dark-content" backgroundColor={Color.baseWhite}/>
+			<SearchBar profileButton="Profile"/>
 			<Tab.Navigator 
 				tabBar={(props) => <TabBar {...props}/>}
 				initialRouteName="Home"

@@ -3,19 +3,28 @@ import {
 	View, 
 	TextInput,
 	StyleSheet,
+	TouchableOpacity, 
 } from "react-native";
-import { 
-	Link, 
-	RelativePathString, 
-} from "expo-router";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParam } from "@/data/navigation-type";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import Color from "./../constants/color";
 
-type SearchBarData = {
-	linkProfile: RelativePathString,
+type NavigationProp = StackNavigationProp<RootStackParam>;
+
+type SearchBarProps = {
+	profileButton?: keyof RootStackParam;
 };
 
-const SearchBar = (props : SearchBarData) => {
+const SearchBar = ({profileButton} : SearchBarProps) => {
+	const  navigation = useNavigation<NavigationProp>();
+	const onPressHandler = () => {
+		if(profileButton !== undefined){
+			navigation.navigate(profileButton);
+		}
+	}
+
 	return(
 		<View style={styles.mainContainer}>
 			<View style={styles.srcBar}>
@@ -27,9 +36,9 @@ const SearchBar = (props : SearchBarData) => {
 				/>
 				<FontAwesome5 name="microphone" style={styles.srcBarIcon}/>
 			</View>
-			<Link href={props.linkProfile} style={styles.profile}>
+			<TouchableOpacity onPress={onPressHandler} style={styles.profile}>
 				<FontAwesome5 name="user-circle" style={styles.profileImg}/>
-			</Link>
+			</TouchableOpacity>
 		</View>
 	);
 };
