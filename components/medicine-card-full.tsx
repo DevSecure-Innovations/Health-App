@@ -9,10 +9,10 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MetarialIcons from "@expo/vector-icons/MaterialIcons";
-import Color from "./../constants/color";
+import Color from "../constants/color";
 import Amount from "./amount";
 
-type CardMedFullProps = {
+type MedicineCardFullProps = {
 	title?: string;
 	info0?: string;
 	info1?: string;
@@ -25,7 +25,7 @@ type CardMedFullProps = {
 	cartOnPress?: () => void;
 };
 
-const defaultProps:CardMedFullProps = {
+const defaultProps:MedicineCardFullProps = {
 	title: "paracetamol",
 	info0: "300mg",
 	info1: "tablet",
@@ -36,7 +36,7 @@ const defaultProps:CardMedFullProps = {
 	imageLink: require("./../assets/images/tablets.jpg"),
 };
 
-const CardMedFull = (props:CardMedFullProps) => {
+const MedicineCardFull = (props:MedicineCardFullProps) => {
     let CardProps = {...defaultProps, ...props};
 	const [quantity, setQuantity] = useState<string>(CardProps.amount0.quantity);
 	const [price, setPrice] = useState<number>(CardProps.amount0.price);
@@ -218,4 +218,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default CardMedFull;
+export default MedicineCardFull;

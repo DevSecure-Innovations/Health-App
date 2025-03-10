@@ -10,10 +10,10 @@ import {
 } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { LinearGradient } from 'expo-linear-gradient';
-import Color from './../constants/color';
-import CardMedFull from './card-med-full';
+import Color from '../constants/color';
+import MedicineCardFull from './medicine-card-full';
 
-type CardProps ={
+type MedicineCardProps ={
 	title?: string;
 	info0?: string;
 	info1?: string;
@@ -25,7 +25,7 @@ type CardProps ={
 	cartOnPress?: () => void;
 };
 
-const defaultProps:CardProps = {
+const defaultProps:MedicineCardProps = {
 	title: 'Medicine 1',
 	info0: '300mg',
 	info1: 'Tablet',
@@ -36,7 +36,7 @@ const defaultProps:CardProps = {
 	imageLink: require('./../assets/images/tablets.jpg'),
 };
 
-const Card = (props:CardProps)=>{
+const MedicalCard = (props:MedicineCardProps) => {
 	const Props = {...defaultProps,...props};
 	const [modalState, setModalState] = useState(false);
 
@@ -78,7 +78,7 @@ const Card = (props:CardProps)=>{
 									onRequestClose={() => setModalState(false)}
 								>
 									<View style={styles.popupOverlay}>
-										<CardMedFull
+										<MedicineCardFull
 											title={Props.title}
 											info0={Props.info0}
 											info1={Props.info1}
@@ -229,4 +229,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default Card;
+export default MedicalCard;
