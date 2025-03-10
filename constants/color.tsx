@@ -7,6 +7,8 @@ export default{
 	baseBlack: "#1E1E1E",
 	
 	baseGreen: "#80CB69",
+	baseGreen50DTint: "#406635",
+	baseGreen80DTint: "#1A2915",
 	olivine: "#8FB67B",
 	olivine40LTint: "#BCD3B0",
 	seaweed: "#19330E",

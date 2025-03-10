@@ -4,55 +4,70 @@ import {
 	Text,
 	StyleSheet,
 	TouchableOpacity,
-	Image,
+	Dimensions,
 	ImageBackground,
     ImageSourcePropType,
 } from "react-native";
 import Color from "./../constants/color";
 import { LinearGradient } from "expo-linear-gradient";
+import Animated, { 
+	interpolate, 
+	SharedValue, 
+	useAnimatedStyle, 
+	Extrapolation,
+	useSharedValue
+} from "react-native-reanimated";
+import { HomeCardDataType } from "@/data/home-card-data";
 
-type CardHomeProps= {
-	title?: string;
-	description?: string;
-	buttonText?: string;
-	imageLink?: ImageSourcePropType;
+const {width} = Dimensions.get("screen");
+
+type HomeCardProps= {
+	item: HomeCardDataType;
+	index: number;
+	scrollX: SharedValue<number>;
 };
 
-const defaultProps:CardHomeProps = {
-	title: "Card Title",
-	description: "Lorem ipsum dolor sit amet consectetur adipisicing quam velit hic molestiae aliquid?",
-	buttonText: "Call Now",
-	imageLink: require("./../assets/images/react-logo.png"),
-};
-
-const CardHome = (props: CardHomeProps) => {
-	const CardProps = {...defaultProps, ...props};
+const HomeCard = (Props: HomeCardProps) => {
+	const rnAnimation = useAnimatedStyle(() => {
+		return {
+			transform: [
+				{
+					scale: interpolate(
+						Props.scrollX.value,
+						[(Props.index - 1)*width, Props.index * width, (Props.index + 1) * width],
+						[0.8, 1, 0.8],
+						Extrapolation.CLAMP
+					)
+				}
+			]
+		}
+	});
 
 	return(
-		<View style={styles.mainCont}>
-			<ImageBackground style={styles.cntxtCont} source={CardProps.imageLink}>
+		<Animated.View style={[styles.mainCont, rnAnimation]}>
+			<ImageBackground style={styles.cntxtCont} source={Props.item.imageLink}>
 				<LinearGradient colors={["rgba(0,0,0,0.8)", "rgba(0,0,0,0.6)", "transparent"]} style={styles.gradient}>
 					<View style={styles.titleCont}>
-						<Text style={styles.title}>{CardProps.title}</Text>
+						<Text style={styles.title}>{Props.item.title}</Text>
 					</View>
 					<View style={styles.descCont}>
-						<Text style={styles.desc}>&emsp;{CardProps.description}</Text>
+						<Text style={styles.desc}>&emsp;{Props.item.description}</Text>
 					</View>
 					<View style={styles.btnCont}>
 						<TouchableOpacity style={styles.btn}>
-							<Text style={styles.btnText}>{CardProps.buttonText}</Text>
+							<Text style={styles.btnText}>{Props.item.buttonText}</Text>
 						</TouchableOpacity>
 					</View>
 				</LinearGradient>
 			</ImageBackground>
-		</View>
+		</Animated.View>
 	);
 };
 
 const styles = StyleSheet.create({
 	mainCont: {
 		height: 250,
-		width: "90%",
+		width: width-20,
 		margin: 10,
 		borderRadius: 20,
 		overflow: "hidden",
@@ -113,4 +128,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default CardHome;
+export default HomeCard;

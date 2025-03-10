@@ -12,7 +12,7 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import Color from "./../constants/color";
 
 type SearchBarData = {
-	linkProfile: "/" | RelativePathString,
+	linkProfile: RelativePathString,
 };
 
 const SearchBar = (props : SearchBarData) => {
