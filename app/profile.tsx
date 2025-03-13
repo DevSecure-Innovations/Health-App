@@ -9,7 +9,7 @@ const ProfileScreen = () => {
       
       <View style={styles.profileContainer}>
         <FontAwesome5 name="user-circle" size={80} color="black" />
-        <Text style={styles.username}>Guest</Text>
+        <Text style={styles.username}>Guest </Text>
 
         <View style={styles.iconRow}>
           <TouchableOpacity style={styles.iconButton}>

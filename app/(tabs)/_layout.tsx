@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from "react";
-import { View, TouchableOpacity, Animated, StyleSheet, Dimensions } from "react-native";
+import React from "react";
+import { View, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
 import { Tabs } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome5 } from "@expo/vector-icons"; // Added FontAwesome5 for better icons
 
 const { width } = Dimensions.get("window");
 
@@ -10,37 +10,39 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
     <View style={styles.tabContainer}>
       {state.routes.map((route, index) => {
         const isFocused = state.index === index;
-        const scaleValue = useRef(new Animated.Value(isFocused ? 1.5 : 1)).current;
 
-        useEffect(() => {
-          Animated.timing(scaleValue, {
-            toValue: isFocused ? 1.5 : 1,
-            duration: 200,
-            useNativeDriver: true,
-          }).start();
-        }, [isFocused]);
-
-       
-        const iconName =
-          route.name === "medicine"
-            ? "medkit"
-            : route.name === "index"
-            ? "home"
-            : "heart";
+        let iconName;
+        switch (route.name) {
+          case "medicine":
+            iconName = "medkit";
+            break;
+          case "index":
+            iconName = "home";
+            break;
+          case "blood":
+            iconName = "heart"; // Blood drop icon
+            break;
+          case "ambulance":
+            iconName = "ambulance"; // Ambulance icon
+            break;
+          case "hospital":
+            iconName = "hospital"; // Hospital icon
+            break;
+          default:
+            iconName = "hospital";
+        }
 
         return (
           <TouchableOpacity
             key={route.name}
             onPress={() => navigation.navigate(route.name)}
-            style={styles.tabButton}
+            style={[styles.tabButton, isFocused && styles.activeTab]}
           >
-            <Animated.View style={[styles.iconWrapper, { transform: [{ scale: scaleValue }] }]}>
-              <Ionicons
-                name={isFocused ? iconName : `${iconName}-outline`}
-                size={isFocused ? 32 : 24}
-                color="black"
-              />
-            </Animated.View>
+            <FontAwesome5
+              name={iconName}
+              size={24}
+              color={isFocused ? "#3498db" : "#888"}
+            />
           </TouchableOpacity>
         );
       })}
@@ -57,9 +59,10 @@ const TabLayout = () => {
       tabBar={(props) => <CustomTabBar {...props} />}
     >
       <Tabs.Screen name="medicine" options={{ title: "Medicine" }} />
-      <Tabs.Screen name="index" options={{ title: "Home" }} />
       <Tabs.Screen name="blood" options={{ title: "Blood" }} />
-    
+      <Tabs.Screen name="index" options={{ title: "Home" }} /> 
+      <Tabs.Screen name="ambulance" options={{ title: "Ambulance" }} />
+      <Tabs.Screen name="hospital" options={{ title: "Hospital" }} />
     </Tabs>
   );
 };
@@ -69,8 +72,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "white",
     height: 70,
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     justifyContent: "space-around",
     alignItems: "center",
     position: "absolute",
@@ -85,11 +88,11 @@ const styles = StyleSheet.create({
   tabButton: {
     flex: 1,
     alignItems: "center",
+    paddingVertical: 10,
   },
-  iconWrapper: {
-    backgroundColor: "transparent",
-    padding: 10,
-    borderRadius: 20,
+  activeTab: {
+    borderBottomWidth: 2,
+    borderBottomColor: "#3498db",
   },
 });
 
