@@ -1,20 +1,19 @@
-import { Stack } from "expo-router";
-import { useFonts } from "expo-font";
-export default function RootLayout() {
+import { tokenCache } from '@/cache'
+import { ClerkProvider, ClerkLoaded } from '@clerk/clerk-expo'
+import { Slot } from 'expo-router'
 
-  useFonts({
-        'font4':require('../assets/fonts/Montserrat-SemiBold.ttf'),
-       'font3':require('../assets/fonts/Righteous-Regular.ttf'),
-       'regular':require('../assets/fonts/PlaywriteITModerna-Regular.ttf'),
-      'outfit':require('../assets/fonts/Outfit-SemiBold.ttf')   
-  })
+export default function RootLayout() {
+  const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!
+
+  if (!publishableKey) {
+    throw new Error('Add EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env')
+  }
+
   return (
-<Stack screenOptions={{
-  headerShown:false
-}
-  
-}>
-   <Stack.Screen name="(tabs)"/>
-  </Stack>
+    <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
+      <ClerkLoaded>
+        <Slot />
+      </ClerkLoaded>
+    </ClerkProvider>
   )
 }
