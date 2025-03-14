@@ -1,22 +1,23 @@
-import React, {useState} from "react";
+import React from "react";
 import { 
 	Text, 
     StyleSheet,
     TouchableOpacity,
 } from "react-native";
+
 import Color from "./../constants/color";
+import { AmountDataType } from "./../data/med-info";
 
 type AmountProps ={
-	quantity?: string;
-	price?: number;
+	amount: AmountDataType;
 	onPress?: () => void;
 };
 
-const Amount = (props:AmountProps) =>{
+const Amount = ({amount, onPress}:AmountProps) =>{
 	return(
-		<TouchableOpacity style={amountStyle.button} onPress={props.onPress}>
-			<Text style={amountStyle.quantity}>{props.quantity}</Text>
-			<Text style={amountStyle.price}>₹{props.price}</Text>
+		<TouchableOpacity style={amountStyle.button} onPress={onPress}>
+			<Text style={amountStyle.quantity}>{amount.quantity}</Text>
+			<Text style={amountStyle.price}>₹{amount.price}</Text>
 		</TouchableOpacity>
 	);
 };

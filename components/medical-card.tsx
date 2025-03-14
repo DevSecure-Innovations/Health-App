@@ -10,39 +10,38 @@ import {
 } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { LinearGradient } from 'expo-linear-gradient';
+
 import Color from '../constants/color';
 import MedicineCardFull from './medicine-card-full';
+import { CardDataType } from "./../data/med-info";
 
 type MedicineCardProps ={
-	title?: string;
-	info0?: string;
-	info1?: string;
-	info2?: string;
-	amount0: {quantity: string; price: number;};
-	amount1: {quantity: string; price: number;};
-	amount2: { quantity: string; price: number;};
-	imageLink?: ImageSourcePropType;
+	content: CardDataType;
 	cartOnPress?: () => void;
 };
 
 const defaultProps:MedicineCardProps = {
-	title: 'Medicine 1',
-	info0: '300mg',
-	info1: 'Tablet',
-	info2: '13+',
-	amount0:{quantity: "5 tablets", price: 20},
-	amount1:{quantity: "10 tablets", price: 40},
-	amount2:{quantity: "15 tablets", price: 60},
-	imageLink: require('./../assets/images/tablets.jpg'),
+	content: {
+		title: 'Medicine 1',
+		dosage: '300mg',
+		formFac: 'Tablet',
+		ageRes: '13+',
+		amount:[
+			{quantity: "5 tablets", price: 20},
+			{quantity: "10 tablets", price: 40},
+			{quantity: "15 tablets", price: 60},
+		],
+		image: require('./../assets/images/tablets.jpg'),
+	}
 };
 
-const MedicalCard = (props:MedicineCardProps) => {
-	const Props = {...defaultProps,...props};
+const MedicalCard = (props : MedicineCardProps) => {
+	const {content} = {...defaultProps,...props};
 	const [modalState, setModalState] = useState(false);
 
 	return(
 		<View style={styles.mainCont}>
-			<ImageBackground imageStyle={styles.image} style={{flex:1}} source={Props.imageLink}>
+			<ImageBackground imageStyle={styles.image} style={{flex:1}} source={content.image}>
 				<LinearGradient 
 					colors={[ "transparent", Color.baseWhite10Tint]} 
 					locations={[0.35, 0.5]}
@@ -50,23 +49,23 @@ const MedicalCard = (props:MedicineCardProps) => {
 				>
 					<View style={styles.overlay}>
 						<View style={styles.cartCont}>
-							<TouchableOpacity style={styles.cartBtn} onPress={Props.cartOnPress}>
+							<TouchableOpacity style={styles.cartBtn} onPress={props.cartOnPress}>
 								<MaterialIcons style={styles.cartIcon} name="add-shopping-cart"/>
 							</TouchableOpacity>
 						</View>
 						<View style={styles.context}>
 							<View style={styles.contextInfo}>
-								<Text style={styles.title}>{Props.title}</Text>
+								<Text style={styles.title}>{content.title}</Text>
 								<Text style={styles.desc}>
-									Dosage: {Props.info0}{"\n"}
-									Form Factor: {Props.info1}{"\n"}
-									Age Restriction: {Props.info2}
+									Dosage: {content.dosage}{"\n"}
+									Form Factor: {content.formFac}{"\n"}
+									Age Restriction: {content.ageRes}
 								</Text>
 							</View>
 							<View style={styles.priceDetailsCont}>
 								<View>
-									<Text style={styles.quantity}>{Props.amount0.quantity}</Text>
-									<Text style={styles.price}>₹ {Props.amount0.price}</Text>
+									<Text style={styles.quantity}>{content.amount[0].quantity}</Text>
+									<Text style={styles.price}>₹ {content.amount[0].price}</Text>
 								</View>
 								<TouchableOpacity style={styles.detailsBtn} onPress={() => setModalState(true)}>
 									<Text style={styles.detailsBtnText}>see details</Text>
@@ -79,23 +78,7 @@ const MedicalCard = (props:MedicineCardProps) => {
 								>
 									<View style={styles.popupOverlay}>
 										<MedicineCardFull
-											title={Props.title}
-											info0={Props.info0}
-											info1={Props.info1}
-											info2={Props.info2}
-											imageLink={Props.imageLink}
-											amount0={{
-												quantity: props.amount0.quantity,
-												price : props.amount0.price
-											}}
-											amount1={{
-												quantity: props.amount1.quantity,
-												price : props.amount1.price
-											}}
-											amount2={{
-												quantity: props.amount2.quantity,
-												price : props.amount2.price
-											}}
+											content={content}
 											closeOnPress={() => setModalState(false)}
 										/>
 									</View>
@@ -116,16 +99,12 @@ const styles = StyleSheet.create({
 		borderRadius: 20,
 		overflow: "hidden",
 		backgroundColor: Color.baseWhite10Tint,
-		shadowColor: "#000000",
-		shadowOffset: { width: 0, height: 2 },
-		shadowOpacity: 0.8,
-		shadowRadius: 2,
-		elevation: 5,
 	},
 	image: {
-		resizeMode: "cover",
+		resizeMode: "contain",
 		position: "absolute",
-		bottom: 100,
+		top: 5,
+		bottom: 130,
 	},
 	gradient: {
 		flex: 1,
@@ -180,7 +159,7 @@ const styles = StyleSheet.create({
 		color: Color.seaweed20LTint,
 	},
 	desc: {
-		fontSize: 14,
+		fontSize: 12.5,
 		lineHeight: 16,
 		textTransform: "capitalize",
 		color: Color.baseBlack,
@@ -195,7 +174,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	quantity: {
-		fontSize: 11,
+		fontSize: 11.25,
 		fontWeight: 600,
 		color: Color.graniteGrey,
 	},
@@ -211,7 +190,12 @@ const styles = StyleSheet.create({
 		height: 40,
 		width: "60%",
 		borderRadius: 20,
-		backgroundColor: Color.seaweed20LTint
+		backgroundColor: Color.seaweed20LTint,
+		shadowColor: "#000000",
+		shadowOffset: { width: 0, height: 2 },
+		shadowOpacity: 0.8,
+		shadowRadius: 2,
+		elevation: 5,
 	},
 	detailsBtnText: {
 		width: "100%",

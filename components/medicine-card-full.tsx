@@ -6,85 +6,77 @@ import {
     TouchableOpacity,
     ImageBackground,
     ImageSourcePropType,
+    FlatList,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MetarialIcons from "@expo/vector-icons/MaterialIcons";
+
 import Color from "../constants/color";
 import Amount from "./amount";
+import { AmountDataType, CardDataType } from "./../data/med-info";
 
 type MedicineCardFullProps = {
-	title?: string;
-	info0?: string;
-	info1?: string;
-	info2?: string;
-	amount0: {quantity: string; price: number;};
-	amount1: {quantity: string; price: number;};
-	amount2: { quantity: string; price: number;};
-	imageLink?: ImageSourcePropType;
+	content: CardDataType;
 	closeOnPress?: () => void;
 	cartOnPress?: () => void;
 };
 
 const defaultProps:MedicineCardFullProps = {
-	title: "paracetamol",
-	info0: "300mg",
-	info1: "tablet",
-	info2: "13+",
-	amount0:{quantity: "5 tablets", price: 20},
-	amount1:{quantity: "10 tablets", price: 40},
-	amount2:{quantity: "15 tablets", price: 60},
-	imageLink: require("./../assets/images/tablets.jpg"),
+	content: {
+		title: "paracetamol",
+		dosage: "300mg",
+		formFac: "tablet",
+		ageRes: "13+",
+		amount: [
+			{quantity: "5 tablets", price: 20},
+			{quantity: "10 tablets", price: 40},
+			{quantity: "15 tablets", price: 60},
+		],
+		image: require("./../assets/images/tablets.jpg"),
+	},
 };
 
 const MedicineCardFull = (props:MedicineCardFullProps) => {
-    let CardProps = {...defaultProps, ...props};
-	const [quantity, setQuantity] = useState<string>(CardProps.amount0.quantity);
-	const [price, setPrice] = useState<number>(CardProps.amount0.price);
+    let {content} = {...defaultProps, ...props};
+	const [quantity, setQuantity] = useState<string>(content.amount[0].quantity);
+	const [price, setPrice] = useState<number>(content.amount[0].price);
+	const amountOnPressHandler = ({quantity, price} : AmountDataType) => {
+		setQuantity(quantity);
+		setPrice(price);
+	};
 
     return (
         <View style={styles.mainCont}>
-            <ImageBackground imageStyle={styles.image} style={{flex:1}} source={CardProps.imageLink}>
+            <ImageBackground imageStyle={styles.image} style={{flex:1}} source={content.image}>
                 <LinearGradient 
 					colors={[ "transparent", Color.baseWhite10Tint ]} 
 					locations={[0.45, 0.6]}
 					style={styles.gradient}
 				>
                     <View style={styles.closeCont}>
-                        <TouchableOpacity style={styles.closeBtn} onPress={CardProps.closeOnPress}>
+                        <TouchableOpacity style={styles.closeBtn} onPress={props.closeOnPress}>
                             <MetarialIcons name="keyboard-arrow-down" style={styles.closeIcon}/>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.contextCont}>
-                        <Text style={styles.titleText}>{CardProps.title}</Text>
+                        <Text style={styles.titleText}>{content.title}</Text>
                         <Text style={styles.desc}>
-							dosage: {CardProps.info0}{'\n'}
-							form factor: {CardProps.info1}{'\n'}
-							age restriction: {CardProps.info2}
+							dosage: {content.dosage}{'\n'}
+							form factor: {content.formFac}{'\n'}
+							age restriction: {content.ageRes}
 						</Text>
 						<View style={styles.amountTab}>
 							<Amount
-								quantity={CardProps.amount0.quantity}
-								price={CardProps.amount0.price}
-								onPress={() => { 
-									setQuantity(CardProps.amount0.quantity)
-									setPrice(CardProps.amount0.price)
-								}}
+								amount={content.amount[0]}
+								onPress={() => amountOnPressHandler(content.amount[0])}
 							/>
 							<Amount
-								quantity={CardProps.amount1.quantity}
-								price={CardProps.amount1.price}
-								onPress={() => { 
-									setQuantity(CardProps.amount1.quantity)
-									setPrice(CardProps.amount1.price)
-								}}
+								amount={content.amount[1]}
+								onPress={() => amountOnPressHandler(content.amount[1])}
 							/>
 							<Amount
-								quantity={CardProps.amount2.quantity}
-								price={CardProps.amount2.price}
-								onPress={() => { 
-									setQuantity(CardProps.amount2.quantity)
-									setPrice(CardProps.amount2.price)
-								}}
+								amount={content.amount[2]}
+								onPress={() => amountOnPressHandler(content.amount[2])}
 							/>
 						</View>
                         <View style={styles.amountCont}>
@@ -92,7 +84,7 @@ const MedicineCardFull = (props:MedicineCardFullProps) => {
                                 <Text style={styles.quantity}>{quantity}</Text>
                                 <Text style={styles.price}>₹{price}</Text>
                             </View>
-                            <TouchableOpacity style={styles.cartBtn} onPress={CardProps.cartOnPress}>
+                            <TouchableOpacity style={styles.cartBtn} onPress={props.cartOnPress}>
 								<Text style={styles.cartText}>add to cart</Text>
                             </TouchableOpacity>
                         </View>
@@ -113,9 +105,10 @@ const styles = StyleSheet.create({
         backgroundColor: Color.baseWhite10Tint,
     },
 	image: {
-		resizeMode: "cover",
+		resizeMode: "contain",
 		position: "absolute",
-		bottom: 100,
+		top: 10,
+		bottom: 300,
 	},
 	gradient: {
 		flex: 1,
