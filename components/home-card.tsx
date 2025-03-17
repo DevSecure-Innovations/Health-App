@@ -19,6 +19,9 @@ import { LinearGradient } from "expo-linear-gradient";
 
 import Color from "./../constants/color";
 import { HomeCardDataType } from "@/data/home-card-data";
+import { RootStackParam } from "@/data/navigation-type";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
 
 const {width} = Dimensions.get("screen");
 
@@ -27,8 +30,10 @@ type HomeCardProps= {
 	index: number;
 	scrollX: SharedValue<number>;
 };
+type NavigationProp = StackNavigationProp<RootStackParam>;
 
 const HomeCard = (Props: HomeCardProps) => {
+	const navigation = useNavigation<NavigationProp>();
 	const rnAnimation = useAnimatedStyle(() => {
 		return {
 			transform: [
@@ -43,6 +48,12 @@ const HomeCard = (Props: HomeCardProps) => {
 			]
 		}
 	});
+	const onPressHandler = () => {
+		if((Props.index % 3) === 1){
+			navigation.navigate("Ambulance");
+		}
+		else{ null }
+	};
 
 	return(
 		<Animated.View style={[styles.mainCont, rnAnimation]}>
@@ -51,11 +62,11 @@ const HomeCard = (Props: HomeCardProps) => {
 					style={styles.gradient}
 					colors={["rgba(10, 10, 35, 0.8)", "rgba(10, 10, 35, 0.6)", "transparent"]} 
 					locations={[0.2, 0.5, 0.8]}
-					>
+				>
 					<Text style={styles.title}>{Props.item.title}</Text>
 					<Text style={styles.desc}>&emsp;{Props.item.description}</Text>
 					<View style={styles.btnCont}>
-						<TouchableOpacity style={styles.btn} activeOpacity={0.75}>
+						<TouchableOpacity style={styles.btn} activeOpacity={0.75} onPress={onPressHandler}>
 							<Text style={styles.btnText}>{Props.item.buttonText}</Text>
 						</TouchableOpacity>
 					</View>

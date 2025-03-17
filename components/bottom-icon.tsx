@@ -8,7 +8,7 @@ import {
 const BottomIcon = () => {
     return (
         <View style={styles.iconContainer}>
-            <Image style={styles.icon} source={require("@/assets/images/icon/bw-bgless-icon.png")} />
+            <Image style={styles.icon} source={require("@/assets/images/icon/bottom-icon.png")} />
         </View>
     );
 };

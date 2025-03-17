@@ -6,10 +6,7 @@ import React, { useState } from 'react'
 import {
     View,
     StyleSheet,
-    KeyboardAvoidingView,
-    Platform,
     TouchableOpacity,
-    ImageBackground,
 } from "react-native";
 import { Text, TextInput, Button, Checkbox } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
@@ -34,7 +31,6 @@ const SignInScreen = () => {
 
     const handleLogin = () => {
         console.log("Logging in with:", phoneNumber, password);
-        // Add your authentication logic here
     };
 
     return (
@@ -47,9 +43,7 @@ const SignInScreen = () => {
             </View>
             <View style={styles.card}>
                 <Text style={styles.title}>Welcome Back!</Text>
-                <Text style={styles.subtitle}>
-                    Sign in to your account to continue
-                </Text>
+                <Text style={styles.subtitle}>Sign in to your account to continue</Text>
 
                 <TextInput
                     label="Phone Number"
@@ -94,11 +88,12 @@ const SignInScreen = () => {
                     mode="contained"
                     onPress={handleLogin}
                     style={styles.loginButton}
-                    labelStyle={styles.buttonText}
                     contentStyle={styles.buttonContent}
                     disabled={!phoneNumber || !password || !checked}
                 >
-                    LOGIN
+                    <Text style={styles.buttonText}>
+                        LOGIN
+                    </Text>
                 </Button>
 
                 <TouchableOpacity
@@ -173,7 +168,7 @@ const styles = StyleSheet.create({
         fontSize: 28,
         fontWeight: "bold",
         textAlign: "center",
-        color: "#2E7D32",
+        color: Color.seaweed20LTint,
         marginBottom: 8,
         letterSpacing: 0.5,
     },

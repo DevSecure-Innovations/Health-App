@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import {
     View,
     StyleSheet,
-    Platform,
     TouchableOpacity,
-    Image,
 } from "react-native";
 import { Text, TextInput, Button, Checkbox } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
@@ -38,9 +36,6 @@ const SignUpScreen = () => {
     const navigation = useNavigation<NavigationProp>();
     const backPressHandler = () => {
         navigation.goBack();
-    };
-    const signInOnPressHandler = () => {
-        navigation.pop(1);
     };
 
     return (
@@ -125,11 +120,10 @@ const SignUpScreen = () => {
                         color="#2E7D32"
                     />
                     <View style={styles.termsTextContainer}>
-                        <Text style={styles.termsText}>
-                            I agree to the{" "}
-                            <Text style={styles.termsLink}>Terms of Service</Text> and{" "}
-                            <Text style={styles.termsLink}>Privacy Policy</Text>
-                        </Text>
+                        <Text style={styles.termsText}>I agree to the{" "}</Text>
+                        <Text style={styles.termsLink}>Terms of Service </Text> 
+                        <Text>and{" "}</Text>
+                        <Text style={styles.termsLink}>Privacy Policy</Text>
                     </View>
                 </View>
 
@@ -158,7 +152,7 @@ const SignUpScreen = () => {
 
                 <View style={styles.loginContainer}>
                     <Text style={styles.loginText}>Already have an account?</Text>
-                    <TouchableOpacity onPress={signInOnPressHandler}>
+                    <TouchableOpacity onPress={backPressHandler}>
                         <Text style={styles.loginLink}> Login</Text>
                     </TouchableOpacity>
                 </View>
@@ -182,7 +176,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         top: 10,
         left: 10
-        
+
     },
     backButton: {
         height: 50,
@@ -217,7 +211,7 @@ const styles = StyleSheet.create({
         fontSize: 28,
         fontWeight: "bold",
         textAlign: "center",
-        color: "#2E7D32",
+        color: Color.seaweed20LTint,
         marginBottom: 8,
         marginTop: 10,
         letterSpacing: 0.5,
@@ -246,9 +240,9 @@ const styles = StyleSheet.create({
     },
     termsTextContainer: {
         flex: 1,
+        flexDirection: "row",
+        flexWrap: "wrap",
         marginLeft: -8,
-        justifyContent: "center",
-        textAlign: "center",
     },
     termsText: {
         color: "#555",
@@ -259,7 +253,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     signupButton: {
-        backgroundColor: "#2E7D32",
+        backgroundColor: Color.seaweed20LTint,
         borderRadius: 12,
         elevation: 4,
         shadowColor: "#2E7D32",
@@ -269,11 +263,17 @@ const styles = StyleSheet.create({
     },
     buttonContent: {
         paddingVertical: 8,
+        justifyContent: "center",
+        alignItems: "center",
     },
     buttonText: {
-        fontSize: 16,
+        height: "100%",
+        fontSize: 24,
         fontWeight: "bold",
+        textAlign: "center",
+        textAlignVertical: "center",
         letterSpacing: 1,
+        color: Color.baseWhite
     },
     divider: {
         flexDirection: "row",

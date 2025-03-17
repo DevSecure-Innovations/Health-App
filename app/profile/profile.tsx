@@ -11,7 +11,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from '@react-navigation/stack';
-import { ProfileStackParam, RootStackParam } from '@/data/navigation-type';
+import { ProfileStackParam } from '@/data/navigation-type';
 
 import Color from "../../constants/color";
 import MenuItem from '@/components/menu-item';

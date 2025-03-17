@@ -1,5 +1,6 @@
 type RootStackParam = {
     MainTabs: undefined;
+    Ambulance: undefined;
     ProfileStack: undefined;
 };
 

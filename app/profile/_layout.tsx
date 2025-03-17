@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { ProfileStackParam } from "@/data/navigation-type";
 import ProfileScreen from "./profile";
 import AuthStack from "./auth/_layout";
-import color from "@/constants/color";
+
 
 const Stack = createStackNavigator<ProfileStackParam>();
 
