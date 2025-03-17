@@ -1,15 +1,21 @@
-import React from "react";
-import { 
-	View, 
+import React, { useEffect } from "react";
+import {
+	View,
 	TextInput,
 	StyleSheet,
-	TouchableOpacity, 
+	TouchableOpacity,
+	TouchableWithoutFeedback,
+	KeyboardAvoidingView,
+	Keyboard,
+	BackHandler,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParam } from "@/data/navigation-type";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+
 import Color from "./../constants/color";
+import { LinearGradient } from "expo-linear-gradient";
 
 type NavigationProp = StackNavigationProp<RootStackParam>;
 
@@ -17,29 +23,37 @@ type SearchBarProps = {
 	profileButton?: keyof RootStackParam;
 };
 
-const SearchBar = ({profileButton} : SearchBarProps) => {
-	const  navigation = useNavigation<NavigationProp>();
+const SearchBar = ({ profileButton }: SearchBarProps) => {
+	const navigation = useNavigation<NavigationProp>();
 	const onPressHandler = () => {
-		if(profileButton !== undefined){
+		if (profileButton !== undefined) {
 			navigation.navigate(profileButton);
 		}
 	}
 
-	return(
-		<View style={styles.mainContainer}>
-			<View style={styles.srcBar}>
-				<FontAwesome5 name="search" style={styles.srcBarIcon}/>
-				<TextInput 
-					style={styles.srcBarInput} 
-					placeholder="Search..."
-					placeholderTextColor={Color.searchbarBorder}
-				/>
-				<FontAwesome5 name="microphone" style={styles.srcBarIcon}/>
-			</View>
-			<TouchableOpacity onPress={onPressHandler} style={styles.profile}>
-				<FontAwesome5 name="user-circle" style={styles.profileImg}/>
-			</TouchableOpacity>
-		</View>
+	return (
+		<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+			<LinearGradient 
+			style={styles.mainContainer}
+				colors={["rgba(216, 224, 226, 1)", "transparent"]}
+				locations={[0.7, 1]}
+			>
+				<View style={styles.mainContainer}>
+					<View style={styles.srcBar}>
+						<FontAwesome5 name="search" style={styles.srcBarIcon} />
+						<TextInput
+							style={styles.srcBarInput}
+							placeholder="Search..."
+							placeholderTextColor="rgba(0, 0, 0, 0.45)"
+						/>
+						<FontAwesome5 name="microphone" style={styles.srcBarIcon} />
+					</View>
+					<TouchableOpacity onPress={onPressHandler} style={styles.profile}>
+						<FontAwesome5 name="user-circle" style={styles.profileImg} />
+					</TouchableOpacity>
+				</View>
+			</LinearGradient>
+		</TouchableWithoutFeedback>
 	);
 };
 
@@ -58,7 +72,7 @@ const styles = StyleSheet.create({
 	srcBar: {
 		flex: 1,
 		height: "100%",
-		backgroundColor: Color.searchbarBase,
+		backgroundColor: Color.baseWhite10Tint,
 		borderColor: Color.searchbarBorder,
 		borderWidth: 2,
 		borderRadius: 30,

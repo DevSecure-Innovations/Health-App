@@ -8,7 +8,7 @@ import {
     ViewStyle,
 } from "react-native";
 
-import Color from "./../constants/color";
+import Color from "../constants/color";
 import { LinearGradient } from "expo-linear-gradient";
 
 type CardProp = {
@@ -17,12 +17,13 @@ type CardProp = {
 	style?: ViewStyle
 };
 
-const Card = ({title, image, style} : CardProp) => {
+const ButtonCard = ({title, image, style} : CardProp) => {
 	return(
-		<TouchableOpacity style={[styles.mainCont, style]}>
+		<TouchableOpacity style={[styles.mainCont, style]} activeOpacity={0.75}>
 			<ImageBackground style={styles.image} source={image}>
 				<LinearGradient 
-					colors={["rgba(0,0,0,0.8)", "rgba(0,0,0,0.6)", "transparent"]} 
+					colors={["transparent", "rgba(10, 10, 35, 0.75)", "rgba(10, 10, 35, 0.9)"]} 
+					locations={[0.45, 0.75, 0.9]}
 					style={styles.gradient}
 				>
 					<Text style={styles.title}>
@@ -38,7 +39,6 @@ const styles = StyleSheet.create({
 	mainCont: {
 		height: 50,
 		width: 50,
-		margin: 10,
 		borderRadius: 20,
 		overflow: "hidden",
 		backgroundColor: Color.baseWhite10Tint,
@@ -57,11 +57,14 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 20,
 	},
 	title: {
-		fontSize: 32,
-		fontWeight: 900,
-		textTransform: "uppercase",
+		position: "absolute",
+		bottom: 10,
+		left: 10,
+		right: 0,
+		fontSize: 24,
+		fontWeight: 700,
 		color: Color.blueKoi,
 	},
 });
 
-export default Card;
+export default ButtonCard;

@@ -2,7 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { RootStackParam } from "@/data/navigation-type";
 import MainTabsLayout from "./main-tabs/_layout";
-import ProfileScreen from "./profile";
+import ProfileStack from "./profile/_layout";
 
 const Stack = createStackNavigator<RootStackParam>();
 
@@ -10,7 +10,7 @@ const Stack = createStackNavigator<RootStackParam>();
 	return(
 		<Stack.Navigator screenOptions={{headerShown: false}} >
 			<Stack.Screen name="MainTabs" component={MainTabsLayout}/>
-			<Stack.Screen name="Profile" component={ProfileScreen}/>
+			<Stack.Screen name="ProfileStack" component={ProfileStack}/>
 		</Stack.Navigator>
 	);
 };

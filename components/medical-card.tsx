@@ -4,8 +4,9 @@ import {
 	Text, 
 	StyleSheet,
 	TouchableOpacity,
+	TouchableWithoutFeedback, 
 	ImageBackground,
-    ImageSourcePropType,
+    Dimensions, 
 	Modal,
 } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -14,6 +15,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Color from '../constants/color';
 import MedicineCardFull from './medicine-card-full';
 import { CardDataType } from "./../data/med-info";
+
+const {width} = Dimensions.get("screen");
 
 type MedicineCardProps ={
 	content: CardDataType;
@@ -67,7 +70,11 @@ const MedicalCard = (props : MedicineCardProps) => {
 									<Text style={styles.quantity}>{content.amount[0].quantity}</Text>
 									<Text style={styles.price}>₹ {content.amount[0].price}</Text>
 								</View>
-								<TouchableOpacity style={styles.detailsBtn} onPress={() => setModalState(true)}>
+								<TouchableOpacity 
+									style={styles.detailsBtn} 
+									onPress={() => setModalState(true)} 
+									activeOpacity={0.65}
+								>
 									<Text style={styles.detailsBtnText}>see details</Text>
 								</TouchableOpacity>
 								<Modal
@@ -76,12 +83,14 @@ const MedicalCard = (props : MedicineCardProps) => {
 									visible={modalState}
 									onRequestClose={() => setModalState(false)}
 								>
+									<TouchableWithoutFeedback onPress={() => setModalState(false)}>
 									<View style={styles.popupOverlay}>
 										<MedicineCardFull
 											content={content}
 											closeOnPress={() => setModalState(false)}
 										/>
 									</View>
+									</TouchableWithoutFeedback>
 								</Modal>
 							</View>
 						</View>
@@ -95,7 +104,7 @@ const MedicalCard = (props : MedicineCardProps) => {
 const styles = StyleSheet.create({
 	mainCont: {
 		height: 250,
-		width: 200,
+		width: (width-60)/2,
 		borderRadius: 20,
 		overflow: "hidden",
 		backgroundColor: Color.baseWhite10Tint,
@@ -184,8 +193,6 @@ const styles = StyleSheet.create({
 		lineHeight: 18,
 		color: Color.seaweed20LTint,
 	},
-	contextButton: {
-	},
 	detailsBtn: {
 		height: 40,
 		width: "60%",
@@ -209,6 +216,7 @@ const styles = StyleSheet.create({
 	},
 	popupOverlay: {
 		flex: 1,
+		backgroundColor: "rgba(0, 0, 0, 0.3)",
 		justifyContent: "flex-end"
 	},
 });

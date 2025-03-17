@@ -8,8 +8,6 @@ import {
 	ImageBackground,
     ImageSourcePropType,
 } from "react-native";
-import Color from "./../constants/color";
-import { LinearGradient } from "expo-linear-gradient";
 import Animated, { 
 	interpolate, 
 	SharedValue, 
@@ -17,6 +15,9 @@ import Animated, {
 	Extrapolation,
 	useSharedValue
 } from "react-native-reanimated";
+import { LinearGradient } from "expo-linear-gradient";
+
+import Color from "./../constants/color";
 import { HomeCardDataType } from "@/data/home-card-data";
 
 const {width} = Dimensions.get("screen");
@@ -46,15 +47,15 @@ const HomeCard = (Props: HomeCardProps) => {
 	return(
 		<Animated.View style={[styles.mainCont, rnAnimation]}>
 			<ImageBackground style={styles.cntxtCont} source={Props.item.imageLink}>
-				<LinearGradient colors={["rgba(0,0,0,0.8)", "rgba(0,0,0,0.6)", "transparent"]} style={styles.gradient}>
-					<View style={styles.titleCont}>
-						<Text style={styles.title}>{Props.item.title}</Text>
-					</View>
-					<View style={styles.descCont}>
-						<Text style={styles.desc}>&emsp;{Props.item.description}</Text>
-					</View>
+				<LinearGradient 
+					style={styles.gradient}
+					colors={["rgba(10, 10, 35, 0.8)", "rgba(10, 10, 35, 0.6)", "transparent"]} 
+					locations={[0.2, 0.5, 0.8]}
+					>
+					<Text style={styles.title}>{Props.item.title}</Text>
+					<Text style={styles.desc}>&emsp;{Props.item.description}</Text>
 					<View style={styles.btnCont}>
-						<TouchableOpacity style={styles.btn}>
+						<TouchableOpacity style={styles.btn} activeOpacity={0.75}>
 							<Text style={styles.btnText}>{Props.item.buttonText}</Text>
 						</TouchableOpacity>
 					</View>
@@ -86,17 +87,15 @@ const styles = StyleSheet.create({
 		paddingVertical: 10,
 		paddingHorizontal: 20,
 	},
-	titleCont: {},
 	title: {
 		fontSize: 32,
-		fontWeight: 900,
+		fontWeight: 800,
 		textTransform: "uppercase",
 		color: Color.blueKoi,
 	},
-	descCont: {},
 	desc: {
 		fontSize: 20,
-		fontWeight: 400,
+		fontWeight: 500,
 		color: Color.baseWhite,
 	},
 	btnCont: {

@@ -79,15 +79,15 @@ const CardData:CardDataType[] = [
 	},
 	{
 		title: "ORS",
-		dosage: "150mg",
-		formFac: "Powder Sachets",
+		dosage: "21.5gm",
+		formFac: "Sachets",
 		ageRes: "12+",
 		amount: [
-			{ quantity: "10 tablets", price: 12.50 },
-			{ quantity: "15 tablets", price: 18.750 },
-			{ quantity: "30 tablets", price: 37.50 },
+			{ quantity: "1 Sachets", price: 20.50 },
+			{ quantity: "5 tablets", price: 102.50 },
+			{ quantity: "10 tablets", price: 205 },
 		],
-		image: require("./../assets/images/medicine/rantac.png")
+		image: require("./../assets/images/medicine/ors.png")
 	},
 ]
 

@@ -4,7 +4,13 @@ import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { MaterialIcons } from "@expo/vector-icons";
 import Color from "./../constants/color";
 
-const TabBar: React.FC<BottomTabBarProps> = ({ state, descriptors, navigation }) => {
+interface TabBarPropType extends BottomTabBarProps {
+	isVisible: boolean;	
+};
+
+const TabBar: React.FC<TabBarPropType> = ({ state, descriptors, navigation, isVisible }) => {
+	if(isVisible) return null;
+
 	return (
 		<View style={styles.tabBar}>
 			{state.routes.map((route, index) => {
@@ -31,7 +37,7 @@ const TabBar: React.FC<BottomTabBarProps> = ({ state, descriptors, navigation })
 					>
 						<MaterialIcons 
 							name={iconName} 
-							size={isFocused ? 50 : 35} 
+							size={isFocused ? 50 : 31.25} 
 							color={isFocused ? Color.baseGreen80DTint : Color.baseGreen50DTint}
 						/>
 					</TouchableOpacity>
@@ -52,10 +58,8 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		justifyContent: "space-around",
 		alignItems: "center",
-		// margin: 10,
-		// borderRadius: 60,
-		borderTopRightRadius: 20,
-		borderTopLeftRadius: 20,
+		borderTopRightRadius: 30,
+		borderTopLeftRadius: 30,
 		position: "absolute",
 		inset: 0,
 		top: "auto",
