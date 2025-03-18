@@ -52,7 +52,9 @@ const HomeCard = (Props: HomeCardProps) => {
 		if((Props.index % 3) === 1){
 			navigation.navigate("Ambulance");
 		}
-		else{ null }
+		if((Props.index % 3) === 2){
+			navigation.navigate("ChatBot");
+		}
 	};
 
 	return(

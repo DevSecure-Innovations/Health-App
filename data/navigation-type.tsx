@@ -1,7 +1,9 @@
 type RootStackParam = {
     MainTabs: undefined;
-    Ambulance: undefined;
     ProfileStack: undefined;
+    Ambulance: undefined;
+    Hospital: undefined;
+    ChatBot: undefined;
 };
 
 type ProfileStackParam = {

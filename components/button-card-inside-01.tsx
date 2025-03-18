@@ -18,6 +18,7 @@ type ButtonCardInside01Props = {
     title?: string;
     buttonText?: string;
     image?: ImageSourcePropType;
+    onPress?: () => void;
 };
 
 type Position = {
@@ -25,7 +26,7 @@ type Position = {
     y:number;
 };
 
-const ButtonCardInside01 = ({ title, buttonText, image}: ButtonCardInside01Props) => {
+const ButtonCardInside01 = ({ title, buttonText, image, onPress}: ButtonCardInside01Props) => {
     let val:Position[] = [
         { x: 1, y: 0 },
         { x: 0, y: 0 }
@@ -46,7 +47,7 @@ const ButtonCardInside01 = ({ title, buttonText, image}: ButtonCardInside01Props
                         <Text style={styles.subDesc}>are currently ongoing in your area!</Text>
                     </View>
                     <View style={styles.btnCont}>
-                        <TouchableOpacity style={styles.btn} activeOpacity={0.75}>
+                        <TouchableOpacity style={styles.btn} activeOpacity={0.75} onPress={onPress}>
                             <Text style={styles.btnText}>{buttonText}</Text>
                         </TouchableOpacity>
                     </View>
